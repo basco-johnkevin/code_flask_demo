@@ -1,0 +1,43 @@
+<html>
+  <title>CodeFlask usage demo</title>
+  <head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="bootstrap.js"></script>
+
+    <script src="prism.js"></script>
+    <script src="https://unpkg.com/codeflask/build/codeflask.min.js"></script>
+  </head>
+  <body>
+    <h1>CodeFlask</h1>
+    
+    <form method="POST" action="/handler" class="js-form">
+
+      <p>
+        <label>Title:</label>
+        <input type="text" name="title">
+      </p>
+
+      
+      <label>Code:</label>
+      <input type="text" name="code" class="js-code d-none">
+      <div class="clearfix" style="height: 300px; position: relative; width: 100%;">
+        <div class="editor" class="js-code-editor"></div>
+      </div>
+
+      <input type="submit" class="js-submit">
+    </form>
+
+    <script>
+      var flask = new CodeFlask('.editor', { language: 'js', lineNumbers: true });
+
+      $('.js-submit').on('click', function(e) {
+        e.preventDefault();;
+        $('.js-code').val(flask.getCode());
+        $('.js-form').submit();
+      });
+    </script>
+  </body>
+</html>
